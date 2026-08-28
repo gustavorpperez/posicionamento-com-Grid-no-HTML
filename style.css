@@ -1,0 +1,132 @@
+/* CONFIGURAÇÕES GERAIS */
+
+* {
+    /* se eu colocar padding, borda -> é incluido no tamanho total do elemento */
+    /* Evita que aumente a caixa dos elementos */
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+    color: #222222;
+}
+
+.cabecalho {
+    background-color: #222222;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 30px;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+.conteudo {
+    margin: 50px auto;
+    width: 70%;
+}
+
+.desafio {
+    background-color: #FFFFFF;
+    padding: 25px;
+    margin-bottom: 40px;
+}
+
+.desafio h2 {
+    margin-bottom: 5px;
+}
+
+/* SINAL >  -  FILHO DIRETO, NÃO NETOS */
+.desafio>p {
+    margin-bottom: 15px;
+}
+
+/*
+    NÍVEL 1
+        CATÁLOGO DE FILMES
+*/
+
+.catalogo {
+    display: grid;
+
+    /* Quero criar 3 colunas, cada uma ocupando uma fração igual do espaço disponível. /*
+    /* repeat() é um atalho para: grid-template-columns: 1fr 1fr 1fr; */
+    grid-template-columns: repeat(3, 1fr);
+
+    /* Só consigo usar o gap com flex ou grid atividados */
+    gap: 15px;
+}
+
+.filme {
+    border: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+
+    /* Tudo que ultrapassar os limites dessa caixa, será escondido/cortado */
+    overflow: hidden;
+}
+
+.filme img {
+    /* Se o card aumentar ou diminuir, a imagem acompanha */
+    width: 100%;
+    /* LARGURA */
+
+    height: 160px;
+    /* altura fixa */
+
+    /* Faz a imagem preencher todo o espaço definido (100% x 160px) sem ficar esticada ou deformada. Se necessário, corta um pouco das laterais ou de cima/baixo */
+    object-fit: cover;
+}
+
+.filme h3,
+.filme p {
+    padding: 10px;
+}
+
+/*
+    NÍVEL 2 
+        FILME EM DESTAQUE
+*/
+
+.destaque-grid {
+    /* As linhas que criamos vão ter 180px */
+    grid-template-rows: repeat(2, 180px);
+
+    /* comportamento implícito do grid -> criar mais linhas automaticamente */
+    /* as linhas que o grid criar automaticamente também terão 180px */
+    grid-auto-rows: 180px;
+}
+
+.destaque-grid .filme {
+    display: grid;
+
+    /*auto -> serve para ocupar o minímo de espaço possível para o elemento aparecer na tela */
+    /* 1fr -> serve para o outro elemento ocupar o espaço que sobrou (ocupa tudo) */
+    /* a imagem vai ocupar mais espaço que o texto */
+    grid-template-rows: 1fr auto;
+}
+
+.destaque-grid .filme img {
+    /* a imagem ocupa o tamanho disponível */
+    height: 100%;
+
+    /* esse min-height: 0 -> é um ajuste para evitar que a imagem force o Grid a ficar maior do que deveria. */
+    /* Se esse espaço for menor que o seu tamanho natural, pode encolher sem reclamar */
+    min-height: 0;
+}
+
+.filme-destaque {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.filme-destaque h3 {
+    padding-bottom: 0;
+}
+
+.filme-destaque p {
+    padding-top: 5px;
+}
